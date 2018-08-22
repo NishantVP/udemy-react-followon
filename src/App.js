@@ -32,6 +32,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <h1> Hi I am React App!</h1>
                 <button onClick={() => this.switchNameHandler('Nishant')}>Switch Name</button>
                 <Person
                     name = {this.state.persons[0].name}
