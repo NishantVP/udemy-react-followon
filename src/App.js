@@ -8,7 +8,8 @@ class App extends Component {
             {name: 'John Snow', age: 27},
             {name: 'Daenerys Targaryen', age: 22}
         ],
-        otherState : "random"
+        otherState : "random",
+        showPersons : false
     };
 
     switchNameHandler = (newName) => {
@@ -20,8 +21,15 @@ class App extends Component {
         })
     };
 
+    togglePersonsHandler = () => {
+        const doesShow = this.state.showPersons;
+        this.setState ({
+            showPersons: !doesShow
+        })
+    };
+
     changeNameHandler = (event) => {
-        this.setState( {
+        this.setState({
             persons: [
                 {name: event.target.value, age: 27},
                 {name: 'Daenerys Targaryen', age: 22}
@@ -44,19 +52,22 @@ class App extends Component {
                 <h1> Hi I am React App!</h1>
                 <button
                     style={style}
-                    onClick={() => this.switchNameHandler('Nishant')}>Switch Name
+                    onClick={this.togglePersonsHandler}>Show / Hide
                 </button>
-                <Person
-                    name = {this.state.persons[0].name}
-                    age = {this.state.persons[0].age}
-                    click = {this.switchNameHandler.bind(this, 'Rob')}
-                    changed = {this.changeNameHandler}
-                > I am the king in the north. </Person>
-                <Person
-                    name = {this.state.persons[1].name}
-                    age = {this.state.persons[1].age}
-                    click = {this.switchNameHandler.bind(this, 'Ned')}
-                > I am the rightful hair to the iron thrown. </Person>
+                { this.state.showPersons ?
+                    <div>
+                        <Person
+                            name={this.state.persons[0].name}
+                            age={this.state.persons[0].age}
+                            click={this.switchNameHandler.bind(this, 'Rob')}
+                            changed={this.changeNameHandler}> I am the king in the north. </Person>
+                        <Person
+                            name={this.state.persons[1].name}
+                            age={this.state.persons[1].age}
+                            click={this.switchNameHandler.bind(this, 'Ned')}> I am the rightful hair to the iron
+                            thrown. </Person>
+                    </div> : null
+                }
             </div>
         );
     }
